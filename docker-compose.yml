@@ -107,6 +107,22 @@ services:
     networks:
       - bigdata-net
 
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ventas_db
+      MYSQL_USER: sqoopuser
+      MYSQL_PASSWORD: sqooppassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - bigdata-net
+
   # --- JUPYTER ---
   jupyter:
     image: jupyter/pyspark-notebook:latest
@@ -137,6 +153,9 @@ services:
     networks:
       - bigdata-net
 
+
+  
+
 networks:
   bigdata-net:
     name: bigdata-network
@@ -148,3 +167,4 @@ volumes:
   kafka_data:
   mongo_data:
   postgres_data:
+  mysql_data:
